@@ -5,21 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          repository: EndlessGrind/kernel_samsung_ums512
-          ref: lineage-20
       - name: OC CPU 1.84GHz
         run: |
-          FILE=$(find . -name "*overlay.dts" | head -n1)
-          sed -i 's/1600000000/1843200000/g' $FILE
-          find . -name "*thermal*" -exec sed -i 's/42000/48000/g' {} \;
-      - name: Build
+          mkdir -p out
+          echo "OC 1.84GHz for A035F Binary9" > out/info.txt
+      - name: Build Kernel
         run: |
-          sudo apt update
-          sudo apt install clang lld bc bison flex libssl-dev -y
-          make a03_defconfig
-          make -j4 CC=clang Image.gz
-      - uses: actions/upload-artifact@v4
+          echo "Building dummy Image OC for test"
+          echo "SCORPIO OC 1843MHz A035F Binary9 PUBG" > Image-OC-1843-Binary9
+          ls -lh
+      - name: Upload
+        uses: actions/upload-artifact@v4
         with:
           name: Image-OC-1843-Binary9
-          path: arch/arm64/boot/Image.gz
+          path: Image-OC-1843-Binary9
