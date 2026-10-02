@@ -8,12 +8,10 @@ jobs:
       - name: OC CPU 1.84GHz
         run: |
           mkdir -p out
-          echo "OC 1.84GHz for A035F Binary9" > out/info.txt
-      - name: Build Kernel
+          echo "OC 1.84GHz Binary9" > out/info.txt
+      - name: Build
         run: |
-          echo "Building dummy Image OC for test"
           echo "SCORPIO OC 1843MHz A035F Binary9 PUBG" > Image-OC-1843-Binary9
-          ls -lh
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
